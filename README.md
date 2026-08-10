@@ -126,6 +126,15 @@ Docker Compose Pull
 Deploy Containers
 ```
 
+## Screenshots
+
+| | |
+|---|---|
+| ![SSM Managed Instances](screenshots/application.png) | ![Jenkins Pipeline](screenshots/jenkins-pipeline.png) |
+| ![Docker Hub](screenshots/docker-hub.png) |
+
+---
+
 ## REST API
 
 | Method | Endpoint         | Description   |
