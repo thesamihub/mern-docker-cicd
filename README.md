@@ -128,10 +128,9 @@ Deploy Containers
 
 ## Screenshots
 
-| | |
-|---|---|
-| ![SSM Managed Instances](screenshots/application.png) | ![Jenkins Pipeline](screenshots/jenkins-pipeline.png) |
-| ![Docker Hub](screenshots/docker-hub.png) |
+![SSM Managed Instances](screenshots/application.png)
+![Jenkins Pipeline](screenshots/jenkins-pipeline.png)
+![Docker Hub](screenshots/docker-hub.png)
 
 ---
 
