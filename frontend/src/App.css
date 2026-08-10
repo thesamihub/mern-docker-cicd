@@ -1,0 +1,178 @@
+/* Global reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family:
+    Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+  direction: ltr;
+}
+
+/* Main container */
+.container {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+/* Page heading */
+.container > div > h1 {
+  margin: 0 0 24px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Add User button */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Add button */
+.is-success {
+  background: #16a34a;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.is-success:hover {
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Table header */
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Table cells */
+td {
+  padding: 16px 18px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Row hover */
+tbody tr {
+  transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* Remove border from last row */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ID column */
+td:first-child {
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Name column */
+td:nth-child(2) {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Email */
+td:nth-child(3) {
+  color: #64748b;
+}
+
+/* Action buttons */
+.is-info {
+  background: #2563eb;
+  color: white;
+  margin-right: 8px;
+}
+
+.is-danger {
+  background: #dc2626;
+  color: white;
+}
+
+/* Small buttons */
+.is-small {
+  padding: 7px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+/* Mobile responsive */
+@media (max-width: 700px) {
+  .container {
+    width: calc(100% - 24px);
+    padding-top: 30px;
+  }
+
+  .container > div > h1 {
+    font-size: 26px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+  }
+}
