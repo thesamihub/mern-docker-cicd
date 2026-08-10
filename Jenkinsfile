@@ -2,7 +2,7 @@ pipeline {
     agent { label 'jenkins-agent-1' }
 
     environment {
-        PROD_SERVER = "100.61.39.88"
+        PROD_SERVER = 'ubuntu@100.61.39.88'
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
@@ -20,8 +20,8 @@ pipeline {
                 echo 'Building Docker image'
 
                 sh '''
-                    docker compose build -t thesamihub/mern-docker-cicd-frontend:$IMAGE_TAG ./frontend
-                    docker compose build -t thesamihub/mern-docker-cicd-frontend:$IMAGE_TAG ./backend
+                    docker build -t thesamihub/mern-docker-cicd-frontend:$IMAGE_TAG ./frontend
+                    docker build -t thesamihub/mern-docker-cicd-backend:$IMAGE_TAG ./backend
                 '''
                 echo 'Images Built Successfully'
             }
@@ -31,8 +31,8 @@ pipeline {
                 echo 'Pushing images to Docker Hub...'
                 
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhubcred'
-                    usernameVariable: 'HUB_USER'
+                    credentialsId: 'dockerhubcred',
+                    usernameVariable: 'HUB_USER',
                     passwordVariable: 'HUB_PASS'
                 )]) {
                     sh '''
@@ -47,19 +47,19 @@ pipeline {
             }
         }
         stage("Deploy"){
-            echo 'SSh and Deploy on production server'
-
-            sh '''
-
-                ssh -o StrictHostKeyChecking=no PROD_SERVER <<EOF
-
-                cd home/ubuntu/MERN_Stack_CRUD
-
-                expose IMAGE_TAG=$IMAGE_TAG
-                docker compose pull
-                docker compose up -d --remove-orphans --force-recreate
-
-            '''
+            steps{
+                echo 'SSh and Deploy on production server'
+                sshagent(['jenkins-agent-1-key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no "$PROD_SERVER" "
+                            cd /home/ubuntu/MERN_Stack_CRUD &&
+                            export IMAGE_TAG=$IMAGE_TAG &&
+                            docker compose pull &&
+                            docker compose up -d --remove-orphans --force-recreate
+                        "
+                    '''
+                }
+            }
         }
     }
     post {
