@@ -62,13 +62,13 @@ jobs:
           run: |
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-frontend:${IMAGE_TAG}
 
-        - name: Push backend image
+        - name: Push frontend image
           run: |
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-backend:${IMAGE_TAG}
         
   deploy:
     name: Deploy to EC2
-    runs-on: ubuntu-latest@v4
+    runs-on: ubuntu-latest
 
     steps:
       - name: Deploy Application
@@ -92,11 +92,10 @@ jobs:
 
               docker compose pull
 
-              docker compuse up -d --remove-orphans --force-recreate
+              docker compose up -d --remove-orphans --force-recreate
 
               docker image prune -f
 
             EOF
 
             rm -f private_key
-          
