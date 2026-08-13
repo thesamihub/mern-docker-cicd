@@ -96,7 +96,7 @@ jobs:
             export IMAGE_TAG=${IMAGE_TAG}
 
             docker compose pull
-            docker compose up -d --remove-orphans --force-recreate INVALID
+            docker compose up -d --remove-orphans --force-recreate
 
             docker image prune -f
 
