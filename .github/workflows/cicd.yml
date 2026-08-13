@@ -60,11 +60,11 @@ jobs:
 
         - name: Push frontend image
           run: |
-            docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-frontend:${IMAGE_TAG}
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-frontend:${IMAGE_TAG}
 
         - name: Push frontend image
           run: |
-            docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-backend:${IMAGE_TAG}
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-backend:${IMAGE_TAG}
         
   deploy:
     name: Deploy to EC2
