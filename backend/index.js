@@ -22,6 +22,8 @@ app.use(express.json());
 app.use(UserRoute)
 
 
-
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 app.listen(5080, ()=> console.log("server is running"))
