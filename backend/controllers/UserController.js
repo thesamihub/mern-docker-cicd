@@ -61,3 +61,7 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
