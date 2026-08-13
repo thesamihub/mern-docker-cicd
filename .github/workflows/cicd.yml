@@ -52,11 +52,11 @@ jobs:
 
         - name: Build frontend  image
           run: |
-            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-frontend:${IMAGE_TAG} ./frontend
+            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-frontend:${IMAGE_TAG} ./frontend
         
         - name: Build backend image
           run: |
-            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-action-cicd-backend:${IMAGE_TAG} ./backend
+            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-backend:${IMAGE_TAG} ./backend
 
         - name: Push frontend image
           run: |
@@ -85,18 +85,17 @@ jobs:
           ssh \
             -o StrictHostKeyChecking=no \
             -i private_key \
-            $EC2_USER@$EC2_HOST << EOF
+            "$EC2_USER@$EC2_HOST" << EOF
 
-              cd /home/ubuntu/mern-docker-cicd
+            cd /home/ubuntu/mern-docker-cicd
 
-              export IMAGE_TAG=${IMAGE_TAG}
+            export IMAGE_TAG=${IMAGE_TAG}
 
-              docker compose pull
+            docker compose pull
+            docker compose up -d --remove-orphans --force-recreate
 
-              docker compose up -d --remove-orphans --force-recreate
+            docker image prune -f
 
-              docker image prune -f
+          EOF
 
-            EOF
-
-            rm -f private_key
+          rm -f private_key
