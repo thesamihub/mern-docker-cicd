@@ -79,6 +79,8 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         
         run: |
+          set -e
+
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
@@ -92,7 +94,7 @@ jobs:
             export IMAGE_TAG=${IMAGE_TAG}
 
             docker compose pull
-            docker compose up -d --remove-orphans --force-recreate
+            docker compose up -d --remove-orphans --force-recreate INVALID
 
             docker image prune -f
 
