@@ -62,7 +62,7 @@ jobs:
           run: |
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-frontend:${IMAGE_TAG}
 
-        - name: Push frontend image
+        - name: Push backend image
           run: |
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/mern-docker-cicd-backend:${IMAGE_TAG}
         
@@ -103,3 +103,8 @@ jobs:
           EOF
 
           rm -f private_key
+
+      - name: Verify deployment
+        run: |
+          sleep 10
+          curl -f http://${{ secrets.EC2_HOST }}/health
